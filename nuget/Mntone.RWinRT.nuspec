@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+	<metadata>
+		<id>Mntone.RWinRT</id>
+		<version>0.0.0</version>
+		<authors>mntone</authors>
+		<owners>mntone</owners>
+		<projectUrl>https://github.com/mntone/RWinRT</projectUrl>
+		<license type="file">license.txt</license>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<description>R/WinRT is ease-to-use resources access for MRTCore.</description>
+		<copyright>Copyright © 2023 mntone</copyright>
+		<language>en-US</language>
+		<tags>Win Windows WinRT WinUI WinAppSDK WindowsAppSDK mntone Cpp C++ C# CSharp</tags>
+	</metadata>
+	<files>
+		<!--<file src="readme.txt" />-->
+		<file target="license.txt" src="..\LICENSE.txt" />
+
+		<file target="build" src="Mntone.RWinRT.props" />
+		<file target="build" src="Mntone.RWinRT.targets" />
+
+		<!-- C# sources -->
+		<file target="embedded\any" src="ResourceManager.cs" />
+		<file target="tools\net6" src="..\bin\Release\RWinRT\net6\*" exclude="..\bin\Release\RWinRT\**\*.pdb" />
+
+		<!-- C++ includes -->
+		<file target="include\res" src="base.h" />
+		
+	</files>
+</package>

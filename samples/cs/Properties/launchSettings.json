@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RWinRT.CSharpApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "RWinRT.CSharpApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

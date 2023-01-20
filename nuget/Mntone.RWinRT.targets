@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+
+	<PropertyGroup>
+		<MntoneResourceGenerateDefaultResources Condition="'$(MntoneResourceGenerateDefaultResources)'==''">Resources</MntoneResourceGenerateDefaultResources>
+		<MntoneResourceGenerateLineBreak Condition="'$(MntoneResourceGenerateLineBreak)'==''">LF</MntoneResourceGenerateLineBreak>
+		<MntoneResourceGenerateIndent Condition="'$(MntoneResourceGenerateIndent)'==''">Space4</MntoneResourceGenerateIndent>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(MSBuildProjectExtension)'=='.vcxproj'">
+		<MntoneResourceGenerateImplNamespace Condition="'$(MntoneResourceGenerateImplNamespace)'==''">__impl</MntoneResourceGenerateImplNamespace>
+		<MntoneResourceGenerateFileName Condition="'$(MntoneResourceGenerateFileName)'==''">res.g.h</MntoneResourceGenerateFileName>
+		<MntoneResourceGenerateLanguage Condition="'$(MntoneResourceGenerateLanguage)'==''">Cpp17</MntoneResourceGenerateLanguage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(MSBuildProjectExtension)'=='.csproj'">
+		<MntoneResourceGenerateImplNamespace Condition="'$(MntoneResourceGenerateImplNamespace)'==''">__Impl</MntoneResourceGenerateImplNamespace>
+		<MntoneResourceGenerateFileName Condition="'$(MntoneResourceGenerateFileName)'==''">Resources.g.cs</MntoneResourceGenerateFileName>
+		<_MntoneResourceGenerateLanguageVersion>$([MSBuild]::GetTargetFrameworkVersion('$(TargetFramework)'))</_MntoneResourceGenerateLanguageVersion>
+		<MntoneResourceGenerateLanguage Condition="'$(MntoneResourceGenerateLanguage)'=='' And '$(_MntoneResourceGenerateLanguageVersion)'&gt;='7'">CSharp11</MntoneResourceGenerateLanguage>
+		<MntoneResourceGenerateLanguage Condition="'$(MntoneResourceGenerateLanguage)'=='' And '$(_MntoneResourceGenerateLanguageVersion)'&gt;='6'">CSharp10</MntoneResourceGenerateLanguage>
+		<MntoneResourceGenerateLanguage Condition="'$(MntoneResourceGenerateLanguage)'=='' And '$(_MntoneResourceGenerateLanguageVersion)'&gt;='5'">CSharp9</MntoneResourceGenerateLanguage>
+		<MntoneResourceGenerateLanguage Condition="'$(MntoneResourceGenerateLanguage)'==''">CSharpLegacy</MntoneResourceGenerateLanguage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(UsingMicrosoftNETSdk)'=='true'">
+		<DefaultLanguage Condition="'$(DefaultLanguage)'==''">en-US</DefaultLanguage>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<MntoneResourceGenerateEnabled Condition="'$(MntoneResourceGenerateEnabled)'==''">true</MntoneResourceGenerateEnabled>
+		<_MntoneResourcePackageToolsFolder>$(MSBuildThisFileDirectory)..\tools\net6\</_MntoneResourcePackageToolsFolder>
+		<_MntoneResourceCompilerExePath Condition="$(_MntoneResourceCompilerExePath)==''">$(_MntoneResourcePackageToolsFolder)RWinRT.exe</_MntoneResourceCompilerExePath>
+		<PrepareForBuildDependsOn Condition="'$(MntoneResourceGenerateEnabled)'=='true' And '$(MSBuildProjectExtension)'=='.vcxproj'">
+			$(PrepareForBuildDependsOn);
+			_MntoneResourceGenerate;
+		</PrepareForBuildDependsOn>
+		<CoreCompileDependsOn Condition="'$(MSBuildProjectExtension)'=='.csproj'">
+			_MntoneResourceSourceInclude;
+			$(CoreCompileDependsOn);
+		</CoreCompileDependsOn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AppxMSBuildToolsPath Condition="'$(AppxMSBuildToolsPath)'==''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\AppxPackage\</AppxMSBuildToolsPath>
+		<AppxMSBuildTaskAssembly Condition="'$(AppxMSBuildTaskAssembly)' == ''">$(AppxMSBuildToolsPath)Microsoft.Build.AppxPackage.dll</AppxMSBuildTaskAssembly>
+	</PropertyGroup>
+
+	<Target
+		Name="_MntoneResourcePrepareGeneration"
+		Outputs="$(MntoneResourceGeneratedFilesDir)">
+		<PropertyGroup>
+			<MntoneResourceGeneratedFilesDir Condition="'$(MntoneResourceGeneratedFilesDir)'=='' And '$(GeneratedFilesDir)'!=''">$([System.IO.Path]::GetFullPath('$(GeneratedFilesDir)'))</MntoneResourceGeneratedFilesDir>
+			<MntoneResourceGeneratedFilesDir Condition="'$(MntoneResourceGeneratedFilesDir)'==''">$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)', 'Generated Files'))</MntoneResourceGeneratedFilesDir>
+		</PropertyGroup>
+	</Target>
+
+	<UsingTask AssemblyFile="$(AppxMSBuildTaskAssembly)" TaskName="Microsoft.Build.AppxPackage.GetDefaultResourceLanguage" />
+
+	<!-- Gets default resource language for the package. -->
+	<Target Name="_MntoneResourceGetDefaultResourceLanguage">
+		<GetDefaultResourceLanguage
+			DefaultLanguage="$(DefaultLanguage)"
+			SourceAppxManifest="@(SourceAppxManifest)">
+			<Output TaskParameter="DefaultResourceLanguage" PropertyName="DefaultResourceLanguage" />
+		</GetDefaultResourceLanguage>
+	</Target>
+	
+	<Target
+		Name="_MntoneResourceGenerate"
+		DependsOnTargets="_MntoneResourcePrepareGeneration;_MntoneResourceGetDefaultResourceLanguage">
+		<PropertyGroup>
+			<!-- Managed Dll's use the "safe" name of the project as the App Package Name -->
+			<MntoneResourceGenerateRootNamespace Condition="'$(ManagedAssembly)'!='false' And '$(OutputType)'!='winmdobj'">$(TargetName)</MntoneResourceGenerateRootNamespace>
+			<!-- Winmd library targets (managed or native) use the default root namespace of the project for the App package name -->
+			<MntoneResourceGenerateRootNamespace Condition="'$(ManagedAssembly)'!='false' And '$(OutputType)'=='winmdobj'">$(RootNamespace)</MntoneResourceGenerateRootNamespace>
+			<MntoneResourceGenerateRootNamespace Condition="'$(ManagedAssembly)'=='false' And '$(RootNamespace)'!=''">$(RootNamespace)</MntoneResourceGenerateRootNamespace>
+			<!-- If RootNamespace is empty fall back to TargetName -->
+			<MntoneResourceGenerateRootNamespace Condition="$(MntoneResourceGenerateRootNamespace)==''">$(TargetName)</MntoneResourceGenerateRootNamespace>
+		</PropertyGroup>
+
+		<ItemGroup>
+			<_MntoneResource
+				Include="@(PRIResource)"
+				Condition="'%(PRIResource.ExcludedFromBuild)'!='true' And '%(Extension)'=='.resw'" />
+		</ItemGroup>
+
+		<PropertyGroup>
+			<_MntoneResourceContinueOnError>false</_MntoneResourceContinueOnError>
+			<_MntoneResourceExcludeParams Condition="'$(MntoneResourceExcludeResourceNames)'!=''">--exclude $(MntoneResourceExcludeResourceNames)</_MntoneResourceExcludeParams>
+			<_MntoneResourceParams Condition="'$(_MntoneResourceParams)'==''">
+--input @(_MntoneResource->'"%(FullPath)"',',')
+--output "$(MntoneResourceGeneratedFilesDir.TrimEnd('\'))"
+$(_MntoneResourceExcludeParams)
+--filename $(MntoneResourceGenerateFileName)
+--namespace $(MntoneResourceGenerateRootNamespace)
+--impl-namespace $(MntoneResourceGenerateImplNamespace)
+--default $(MntoneResourceGenerateDefaultResources)
+--indent $(MntoneResourceGenerateIndent)
+--language $(DefaultResourceLanguage)
+--langver $(MntoneResourceGenerateLanguage)
+--linebreak $(MntoneResourceGenerateLineBreak)
+			</_MntoneResourceParams>
+		</PropertyGroup>
+
+		<MakeDir Directories="$(MntoneResourceGeneratedFilesDir)" />
+		<Message Text="&quot;$(_MntoneResourceCompilerExePath)&quot; $(_MntoneResourceParams)" Importance="high" />
+		<Exec Command="&quot;$(_MntoneResourceCompilerExePath)&quot; $([System.String]::Copy('$(_MntoneResourceParams)').Replace('%0D',' ').Replace('%0A',' '))"  ContinueOnError="$(_MntoneResourceContinueOnError)" />
+
+		<ItemGroup Condition="Exists('$(MntoneResourceGeneratedFilesDir)$(MntoneResourceGenerateFileName)')">
+			<UpToDateCheckInput Include="$(MntoneResourceGeneratedFilesDir)$(MntoneResourceGenerateFileName)" />
+		</ItemGroup>
+	</Target>
+
+	<Target
+		Name="_MntoneResourceSourceInclude"
+		BeforeTargets="BeforeCompile;GenerateTargetFrameworkMonikerAttribute"
+		DependsOnTargets="_MntoneResourceGenerate"
+		Condition="'$(MntoneResourceGenerateEnabled)'=='true'">
+		<ItemGroup>
+			<Compile Include="$(MSBuildThisFileDirectory)..\embedded\any\ResourceManager.cs"  Exclude="@(Compile)" />
+			<Compile Include="$(MntoneResourceGeneratedFilesDir)$(MntoneResourceGenerateFileName)"  Exclude="@(Compile)" />
+		</ItemGroup>
+	</Target>
+
+</Project>

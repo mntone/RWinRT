@@ -1,0 +1,7 @@
+namespace RWinRT.CppApp
+{
+    [interface_name("IMainWindow", 3EB81FCC-0260-432C-B790-B41F1704377B)]
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Window
+    {
+    }
+}

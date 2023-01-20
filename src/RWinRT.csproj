@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net45;net6</TargetFrameworks>
+    <RootNamespace>Mntone.RWinRT</RootNamespace>
+    <StartupObject>Mntone.RWinRT.Program</StartupObject>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputPath>$(ProjectDir)..\bin\$(Configuration)\$(MSBuildProjectName)\</OutputPath>
+    <IntermediateOutputPath>$(ProjectDir)..\obj\$(Configuration)\$(MSBuildProjectName)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <Import Project="version.props" />
+  
+  <PropertyGroup>
+    <Product>R/WinRT</Product>
+    <Authors>$(RWinRTAuthor)</Authors>
+    <Copyright>$(RWinRTCopyright)</Copyright>
+    <VersionPrefix>$(RWinRTVersionMajor).$(RWinRTVersionMinor).$(RWinRTVersionPatch).$(RWinRTVersionPreReleaseId)</VersionPrefix>
+    <VersionSuffix Condition="'$(RWinRTVersionPreRelease)'!=''">$(RWinRTVersionPreRelease)</VersionSuffix>
+    <AssemblyVersion>$(RWinRTVersionMajor).$(RWinRTVersionMinor).$(RWinRTVersionPatch).$(RWinRTVersionPreReleaseId)</AssemblyVersion>
+    <FileVersion>$(RWinRTVersionMajor).$(RWinRTVersionMinor).$(RWinRTVersionBuild).$(RWinRTVersionRevision)</FileVersion>
+    <InformationalVersion Condition="$(RWinRTVersionPreReleaseId)&lt;10000">$(RWinRTVersionMajor).$(RWinRTVersionMinor).$(RWinRTVersionPatch)-$(RWinRTVersionPreRelease)</InformationalVersion>
+    <InformationalVersion Condition="$(RWinRTVersionPreReleaseId)&gt;=10000">$(RWinRTVersionMajor).$(RWinRTVersionMinor).$(RWinRTVersionPatch)</InformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.*" />
+    <PackageReference Include="System.Memory" Version="4.5.*" Condition="'$(TargetFramework)'=='net45'" />
+  </ItemGroup>
+</Project>

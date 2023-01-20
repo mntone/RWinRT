@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+
+	<PropertyGroup>
+		<!-- Only do this for MSBuild versions below 16.0 as it is since done automatically -->
+		<MSBuildAllProjects Condition="'$(MSBuildToolsVersion)'&lt;='15'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+	</PropertyGroup>
+
+	<ItemDefinitionGroup Condition="'$(MSBuildProjectExtension)'=='.vcxproj'">
+		<ClCompile>
+			<AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+</Project>
