@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -24,10 +24,16 @@
     <MntoneResourceExcludeResourceNames>Resources</MntoneResourceExcludeResourceNames>
   </PropertyGroup>
 
+  <!-- R/WinRT options (experimental) -->
+  <PropertyGroup>
+    <MntoneResourceGenerateMode>3</MntoneResourceGenerateMode>
+    <DefineConstants>$(DefineConstants);CSHARP_AUTOGEN_IS_V3</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-    <PackageReference Include="Mntone.RWinRT" Version="0.0.1-alpha" />
+    <PackageReference Include="Mntone.RWinRT" Version="0.0.2-alpha" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

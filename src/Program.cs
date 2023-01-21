@@ -82,6 +82,9 @@ namespace Mntone.RWinRT
 					case 1:
 						output = CSharpAutogen1.Build(ctx, defaultResource, otherResources);
 						break;
+					case 3:
+						output = CSharpAutogen3.Build(ctx, defaultResource, otherResources);
+						break;
 					case 2:
 					default:
 						output = CSharpAutogen2.Build(ctx, defaultResource, otherResources);

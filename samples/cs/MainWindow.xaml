@@ -58,7 +58,7 @@
 
 			<Expander Grid.Row="2"
 					  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-					  Header="Document"
+					  Header="Document (CSharpAutogenV2)"
 					  HorizontalAlignment="Stretch"
 					  HorizontalContentAlignment="Left"
 					  IsExpanded="True"

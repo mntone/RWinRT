@@ -21,7 +21,7 @@ app.manifest         text encoding=utf-8 eol=lf
 *.resw               text encoding=utf-8-bom eol=crlf
 *.xaml               text encoding=utf-8 eol=crlf
 *.sln                text encoding=utf-8-bom eol=crlf
-*.csproj             text encoding=utf-8-bom eol=lf
+*.csproj             text encoding=utf-8 eol=lf
 *.props              text encoding=utf-8 eol=lf
 *.targets            text encoding=utf-8 eol=lf
 *.vcxproj            text encoding=utf-8 eol=crlf

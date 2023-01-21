@@ -5,42 +5,14 @@
 		<RWinRTCopyright>Copyright (c) 2023 $(RWinRTAuthor). All rights reserved.</RWinRTCopyright>
 		<RWinRTVersionMajor>0</RWinRTVersionMajor>
 		<RWinRTVersionMinor>0</RWinRTVersionMinor>
-		<RWinRTVersionPatch>1</RWinRTVersionPatch>
+		<RWinRTVersionPatch>2</RWinRTVersionPatch>
 		<RWinRTVersionBuild Condition="$(AngelVersionBuild)==''">$([System.DateTime]::Now.ToString(`yyyy`))</RWinRTVersionBuild>
 		<RWinRTVersionRevision Condition="$(AngelVersionRevision)==''">$([System.DateTime]::Now.ToString(`MMdd`))</RWinRTVersionRevision>
 		<RWinRTVersionPreRelease>alpha</RWinRTVersionPreRelease>
-		<RWinRTVersionPreReleaseId Condition="'$(AngelVersionPreRelease.StartsWith(`alpha`))'">$(AngelVersionPreRelease.Substring(5))</RWinRTVersionPreReleaseId>
-		<RWinRTVersionPreReleaseId Condition="'$(AngelVersionPreRelease.StartsWith(`beta`))'">$([MSBuild]::Add(1000, $([System.Convert]::ToUInt16($(AngelVersionPreRelease.Substring(4)), 10))))</RWinRTVersionPreReleaseId>
-		<RWinRTVersionPreReleaseId Condition="$(AngelVersionPreReleaseId)==''">10000</RWinRTVersionPreReleaseId>
+    <RWinRTVersionPreReleaseId Condition="'$(RWinRTVersionPreRelease)'=='alpha'">0</RWinRTVersionPreReleaseId>
+		<RWinRTVersionPreReleaseId Condition="'$(RWinRTVersionPreReleaseId)'=='' And '$(RWinRTVersionPreRelease.StartsWith(`alpha`))'">$(RWinRTVersionPreRelease.Substring(5))</RWinRTVersionPreReleaseId>
+    <RWinRTVersionPreReleaseId Condition="'$(RWinRTVersionPreReleaseId)'=='' And '$(RWinRTVersionPreRelease)'=='beta'">1000</RWinRTVersionPreReleaseId>
+		<RWinRTVersionPreReleaseId Condition="'$(RWinRTVersionPreReleaseId)'=='' And '$(RWinRTVersionPreRelease.StartsWith(`beta`))'">$([MSBuild]::Add(1000, $([System.Convert]::ToUInt16($(RWinRTVersionPreRelease.Substring(4)), 10))))</RWinRTVersionPreReleaseId>
+		<RWinRTVersionPreReleaseId Condition="'$(RWinRTVersionPreRelease)'==''">10000</RWinRTVersionPreReleaseId>
 	</PropertyGroup>
-	<ItemDefinitionGroup>
-		<ClCompile>
-			<PreprocessorDefinitions>
-				%(PreprocessorDefinitions);
-				RWINRT_AUTHOR=$(AngelAuthor);
-				RWINRT_COPYRIGHT=$(AngelCopyright);
-				RWINRT_VERSION_MAJOR=$(AngelVersionMajor);
-				RWINRT_VERSION_MINOR=$(AngelVersionMinor);
-				RWINRT_VERSION_PATCH=$(AngelVersionPatch);
-				RWINRT_VERSION_BUILD=$(AngelVersionBuild);
-				RWINRT_VERSION_REVISION=$(AngelVersionRevision);
-				RWINRT_VERSION_PRERELEASE=$(AngelVersionPreRelease);
-				RWINRT_VERSION_PREID=$(AngelVersionPreReleaseId);
-			</PreprocessorDefinitions>
-		</ClCompile>
-		<ResourceCompile>
-			<PreprocessorDefinitions>
-				%(PreprocessorDefinitions);
-				RWINRT_AUTHOR=$(AngelAuthor);
-				RWINRT_COPYRIGHT=$(AngelCopyright);
-				RWINRT_VERSION_MAJOR=$(AngelVersionMajor);
-				RWINRT_VERSION_MINOR=$(AngelVersionMinor);
-				RWINRT_VERSION_PATCH=$(AngelVersionPatch);
-				RWINRT_VERSION_BUILD=$(AngelVersionBuild);
-				RWINRT_VERSION_REVISION=$(AngelVersionRevision);
-				RWINRT_VERSION_PRERELEASE=$(AngelVersionPreRelease);
-				RWINRT_VERSION_PREID=$(AngelVersionPreReleaseId);
-			</PreprocessorDefinitions>
-		</ResourceCompile>
-	</ItemDefinitionGroup>
 </Project>

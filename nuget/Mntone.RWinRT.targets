@@ -122,7 +122,8 @@ $(_MntoneResourcePublicParams)
 		DependsOnTargets="_MntoneResourceGenerate"
 		Condition="'$(MntoneResourceGenerateEnabled)'=='true'">
 		<ItemGroup>
-			<Compile Include="$(MSBuildThisFileDirectory)..\embedded\any\ResourceManager.cs"  Exclude="@(Compile)" />
+			<Compile Include="$(MSBuildThisFileDirectory)..\embedded\any\ResourceManager.cs" Exclude="@(Compile)" Condition="'$(MntoneResourceGenerateMode)'!='3'" />
+			<Compile Include="$(MSBuildThisFileDirectory)..\embedded\any\ResourceManager3.cs" Exclude="@(Compile)" Condition="'$(MntoneResourceGenerateMode)'=='3'" />
 			<Compile Include="$(MntoneResourceGeneratedFilesDir)$(MntoneResourceGenerateFileName)"  Exclude="@(Compile)" />
 		</ItemGroup>
 	</Target>

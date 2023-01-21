@@ -22,6 +22,7 @@
 
 		<!-- C# sources -->
 		<file target="embedded\any" src="ResourceManager.cs" />
+		<file target="embedded\any" src="ResourceManager3.cs" />
 		<file target="tools\net6" src="..\bin\Release\RWinRT\net6\*" exclude="..\bin\Release\RWinRT\**\*.pdb" />
 
 		<!-- C++ includes -->
