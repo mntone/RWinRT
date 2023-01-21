@@ -42,7 +42,7 @@ namespace Mntone.RWinRT
 		[Option("mode", Default = int.MaxValue, HelpText = "Output mode (Generator version).")]
 		public int Mode { get; set; }
 
-		[Option("public", Default = false, HelpText = "Accessor level is public (C# only).")]
+		[Option('p', "public", Default = false, HelpText = "Accessor level is public (C# only).")]
 		public bool IsPublic { get; set; }
 	}
 }

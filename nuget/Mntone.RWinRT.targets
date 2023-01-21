@@ -3,8 +3,8 @@
 
 	<PropertyGroup>
 		<MntoneResourceGenerateDefaultResources Condition="'$(MntoneResourceGenerateDefaultResources)'==''">Resources</MntoneResourceGenerateDefaultResources>
-		<MntoneResourceGenerateLineBreak Condition="'$(MntoneResourceGenerateLineBreak)'==''">LF</MntoneResourceGenerateLineBreak>
 		<MntoneResourceGenerateIndent Condition="'$(MntoneResourceGenerateIndent)'==''">Space4</MntoneResourceGenerateIndent>
+		<MntoneResourceGenerateLineBreak Condition="'$(MntoneResourceGenerateLineBreak)'==''">LF</MntoneResourceGenerateLineBreak>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(MSBuildProjectExtension)'=='.vcxproj'">
@@ -88,6 +88,8 @@
 		<PropertyGroup>
 			<_MntoneResourceContinueOnError>false</_MntoneResourceContinueOnError>
 			<_MntoneResourceExcludeParams Condition="'$(MntoneResourceExcludeResourceNames)'!=''">--exclude $(MntoneResourceExcludeResourceNames)</_MntoneResourceExcludeParams>
+			<_MntoneResourceModeParams Condition="'$(MntoneResourceGenerateMode)'!=''">--mode $(MntoneResourceGenerateMode)</_MntoneResourceModeParams>
+			<_MntoneResourcePublicParams Condition="'$(MntoneResourcePublic)'=='true'">--public</_MntoneResourcePublicParams>
 			<_MntoneResourceParams Condition="'$(_MntoneResourceParams)'==''">
 --input @(_MntoneResource->'"%(FullPath)"',',')
 --output "$(MntoneResourceGeneratedFilesDir.TrimEnd('\'))"
@@ -100,6 +102,8 @@ $(_MntoneResourceExcludeParams)
 --language $(DefaultResourceLanguage)
 --langver $(MntoneResourceGenerateLanguage)
 --linebreak $(MntoneResourceGenerateLineBreak)
+$(_MntoneResourceModeParams)
+$(_MntoneResourcePublicParams)
 			</_MntoneResourceParams>
 		</PropertyGroup>
 

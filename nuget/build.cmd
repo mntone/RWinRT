@@ -18,7 +18,7 @@ goto MAIN
 		echo +-------------------------------------------
 		echo ^| Build %%f
 		echo +-------------------------------------------
-		"%MSBUILD%" "%SOLUTION_FILE%" -fl -flp:logfile=msbuild_projection.log -m -t:"%%f":Clean;"%%f":Rebuild -p:Configuration=%TARGET_CONFIGURATION%;Platform=x86
+		"%MSBUILD%" "%SOLUTION_FILE%" -fl -flp:logfile=msbuild_rwinrt.log -m -t:"%%f":Clean;"%%f":Rebuild -p:Configuration=%TARGET_CONFIGURATION%;Platform=x86
 		if errorlevel 1 goto ERROR
 		if "%CLEAN_AFTER_BUILD%" == "true" (
 			rd /s /q "../obj/%TARGET_CONFIGURATION%/%%f"
