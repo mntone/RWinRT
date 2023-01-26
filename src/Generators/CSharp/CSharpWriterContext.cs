@@ -8,25 +8,29 @@
 		public string Accessor { get; }
 #endif
 
+		public override bool SetReadOnly => true;
+
 		public CSharpWriterContext(
 			string rootNamespace,
 			string implNamespace = "__Impl",
+			string outputDirectory = "./",
 			string filename = "Resources.g.cs",
 			string indent = "\t",
 			LineBreak lineBreak = RWinRT.LineBreak.LF,
 			bool isPublic = false)
-			: this(CSharpVersion.CSharp10, rootNamespace, implNamespace, filename, indent, lineBreak, isPublic)
+			: this(CSharpVersion.CSharp10, rootNamespace, implNamespace, outputDirectory, filename, indent, lineBreak, isPublic)
 		{ }
 
 		public CSharpWriterContext(
 			CSharpVersion languageVersion,
 			string rootNamespace,
 			string implNamespace = "__Impl",
+			string outputDirectory = "./",
 			string filename = "Resources.g.cs",
 			string indent = "\t",
 			LineBreak lineBreak = RWinRT.LineBreak.LF,
 			bool isPublic = false)
-			 : base(languageVersion.AsLanguage(), filename, rootNamespace, implNamespace, indent, lineBreak)
+			 : base(languageVersion.AsLanguage(), outputDirectory, filename, rootNamespace, implNamespace, indent, lineBreak)
 		{
 			Accessor = isPublic ? "public" : "internal";
 		}

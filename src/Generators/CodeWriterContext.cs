@@ -11,6 +11,8 @@ namespace Mntone.RWinRT.Generators
 #if NET6_0_OR_GREATER
 		public Language Language { get; init; }
 
+		public string OutputDirectory { get; init; }
+
 		public string FileName { get; init; }
 
 		public string RootNamespace { get; init; }
@@ -26,6 +28,8 @@ namespace Mntone.RWinRT.Generators
 		public Func<string, string> PreferredNameConverter { get; init; }
 #else
 		public Language Language { get; }
+
+		public string OutputDirectory { get; }
 
 		public string FileName { get; }
 
@@ -45,8 +49,13 @@ namespace Mntone.RWinRT.Generators
 
 		public byte NestLevel { get; set; }
 
+		public abstract bool SetReadOnly { get; }
+
+		public string IntermediateFileName => FileName + ".intermediate";
+
 		protected CodeWriterContext(
 			Language language,
+			string outputDirectory,
 			string filename,
 			string rootNamespace,
 			string implNamespace = "__impl",
@@ -55,6 +64,7 @@ namespace Mntone.RWinRT.Generators
 		{
 			Builder = new StringBuilder();
 			Language = language;
+			OutputDirectory = outputDirectory;
 			FileName = filename;
 			RootNamespace = rootNamespace;
 			ImplNamespace = implNamespace;

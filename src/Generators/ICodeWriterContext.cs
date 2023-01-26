@@ -9,7 +9,11 @@ namespace Mntone.RWinRT.Generators
 
 		Language Language { get; }
 
+		string OutputDirectory { get; }
+
 		string FileName { get; }
+
+		string IntermediateFileName { get; }
 
 		string RootNamespace { get; }
 
@@ -18,6 +22,8 @@ namespace Mntone.RWinRT.Generators
         string LineBreak { get; }
 
 		Func<string, string> PreferredNameConverter { get; }
+
+		bool SetReadOnly { get; }
 
 		byte NestLevel { get; set; }
 

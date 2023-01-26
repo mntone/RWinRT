@@ -4,6 +4,8 @@ using Mntone.RWinRT.Generators.Cpp;
 using Mntone.RWinRT.Generators.CSharp;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Mntone.RWinRT
 {
@@ -41,17 +43,36 @@ namespace Mntone.RWinRT
 				return -1;
 			}
 
-			// Generate
+			// Calc hash
 			var defaultResource = resources.SingleOrDefault(r => r.ResourceType == options.Value.DefaultResourceFilename);
 			var otherResources = resources.Except(new[] { defaultResource }).ToArray();
+			var hashBaseData = string.Concat(defaultResource.Resources.Select(r => r.BaseData)
+				.Concat(otherResources.SelectMany(rs => rs.Resources.SelectMany(r => new string[] { "\n[", rs.ResourceType, "]\n", r.BaseData }))));
+			string hashString;
+			using (var hasher = SHA256.Create())
+			{
+				hashString = string.Concat(hasher.ComputeHash(Encoding.Unicode.GetBytes(hashBaseData)).Select(x => $"{x:X2}"));
+			}
+
+			// Generate
 			if (options.Value.LanguageVersion.GetIsCpp())
 			{
 				var ctx = new CppWriterContext(
 					options.Value.LanguageVersion.ToCppVersion(),
 					options.Value.RootNamespace,
 					implNamespace: options.Value.ImplNamespace,
+					outputDirectory: options.Value.OutputDirectory.Trim(new[] { '"' }),
 					filename: options.Value.FileName ?? "res.g.h",
 					lineBreak: options.Value.LineBreak);
+				if (!ctx.ExistsOutputDirectory())
+				{
+					return -1;
+				}
+
+				if (ctx.CheckHashString(hashString) > 0)
+				{
+					return 0;
+				}
 
 				string output;
 				switch (options.Value.Mode)
@@ -64,7 +85,7 @@ namespace Mntone.RWinRT
 						output = CppAutogen2.Build(ctx, defaultResource, otherResources);
 						break;
 				}
-				return ctx.Save(output, options.Value.OutputDirectory, false);
+				return ctx.Save(output);
 			}
 			else
 			{
@@ -72,9 +93,19 @@ namespace Mntone.RWinRT
 					options.Value.LanguageVersion.ToCSharpVersion(),
 					options.Value.RootNamespace,
 					implNamespace: options.Value.ImplNamespace,
+					outputDirectory: options.Value.OutputDirectory.Trim(new[] { '"' }),
 					filename: options.Value.FileName ?? "Resources.g.cs",
 					lineBreak: options.Value.LineBreak,
 					isPublic: options.Value.IsPublic);
+				if (!ctx.ExistsOutputDirectory())
+				{
+					return -1;
+				}
+
+				if (ctx.CheckHashString(hashString) > 0)
+				{
+					return 0;
+				}
 
 				string output;
 				switch (options.Value.Mode)
@@ -90,7 +121,7 @@ namespace Mntone.RWinRT
 						output = CSharpAutogen2.Build(ctx, defaultResource, otherResources);
 						break;
 				}
-				return ctx.Save(output, options.Value.OutputDirectory);
+				return ctx.Save(output);
 			}
 		}
 	}

@@ -11,6 +11,8 @@ namespace Mntone.RWinRT
 		public string Name;
 		public string Value;
 		public XmlSpace Space;
+
+		public string BaseData => $"{Name}\t{Value}\n";
 	}
 
 #if NET6_0_OR_GREATER

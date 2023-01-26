@@ -5,16 +5,37 @@ namespace Mntone.RWinRT.Generators
 {
 	public static class FileExtensions
 	{
-		public static int Save(this ICodeWriterContext ctx, string content, string directory, bool setReadonly = true)
-		{
-			var outputDirectory = directory.Trim(new[] { '"' });
-			if (!Directory.Exists(outputDirectory))
-			{
-				return -1;
-			}
+		public static bool ExistsOutputDirectory(this ICodeWriterContext ctx)
+			=> Directory.Exists(ctx.OutputDirectory);
 
+		public static int CheckHashString(this ICodeWriterContext ctx, string inputHashString)
+		{
+			var filepath = Path.Combine(ctx.OutputDirectory, ctx.IntermediateFileName);
+			using (var stream = new FileStream(filepath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+			{
+				using (var reader = new StreamReader(stream, Encoding.UTF8, false, 1024 /* Default Buffer Size*/, true))
+				{
+					var generatedHashString = reader.ReadLine();
+					if (generatedHashString == inputHashString)
+					{
+						return 1;
+					}
+				}
+
+				stream.Position = 0;
+
+				using (var writer = new StreamWriter(stream, Encoding.UTF8))
+				{
+					writer.Write(inputHashString);
+				}
+			}
+			return 0;
+		}
+
+		public static int Save(this ICodeWriterContext ctx, string content)
+		{
 			// Get readonly state from generated file.
-			var filepath = Path.Combine(outputDirectory, ctx.FileName);
+			var filepath = Path.Combine(ctx.OutputDirectory, ctx.FileName);
 
 			FileAttributes attr;
 			try
@@ -39,7 +60,7 @@ namespace Mntone.RWinRT.Generators
 			}
 
 			// Set readonly to generated file.
-			if (setReadonly)
+			if (ctx.SetReadOnly)
 			{
 				attr = File.GetAttributes(filepath);
 				if (!attr.HasFlag(FileAttributes.ReadOnly))
