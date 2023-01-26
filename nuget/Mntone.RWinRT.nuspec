@@ -11,7 +11,7 @@
 		<description>R/WinRT is ease-to-use resources access for MRTCore.</description>
 		<copyright>Copyright © 2023 mntone</copyright>
 		<language>en-US</language>
-		<tags>Win Windows WinRT WinUI WinAppSDK WindowsAppSDK mntone Cpp C++ C# CSharp</tags>
+		<tags>Win Windows WinRT WindowsRuntime WinUI WindowsUI WinAppSDK WindowsAppSDK mntone Cpp C++ C# CSharp MRTCore Resources resw Culture Globalization Localization i18n</tags>
 	</metadata>
 	<files>
 		<!--<file src="readme.txt" />-->
@@ -21,7 +21,7 @@
 		<file target="build" src="Mntone.RWinRT.targets" />
 
 		<!-- C# sources -->
-		<file target="embedded\any" src="ResourceManager.cs" />
+		<file target="embedded\any" src="ResourceManager2.cs" />
 		<file target="embedded\any" src="ResourceManager3.cs" />
 		<file target="tools\net6" src="..\bin\Release\RWinRT\net6\*" exclude="..\bin\Release\RWinRT\**\*.pdb" />
 

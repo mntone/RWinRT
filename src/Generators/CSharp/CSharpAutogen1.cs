@@ -19,7 +19,7 @@ namespace Mntone.RWinRT.Generators.CSharp
 			"// </auto-generated>",
 			"//------------------------------------------------------------------------------",
 			"",
-			"// R/WinRT (C#)",
+			"// R/WinRT (C#) / CSharpAutogen V1",
 			"//",
 			$"// Copyright (C) {DateTime.UtcNow.Year} {System.Diagnostics.FileVersionInfo.GetVersionInfo( typeof(Program).Assembly.Location).CompanyName}.",
 			"// Licensed under the MIT License.",

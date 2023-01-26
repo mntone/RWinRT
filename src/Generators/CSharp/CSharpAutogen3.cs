@@ -48,7 +48,7 @@ namespace Mntone.RWinRT.Generators.CSharp
 					var preferredName = ctx.PreferredNameConverter(name);
 					Raw.Write(ctx,
 						$"/// <summary>\"{resource.Value}\"</summary>",
-						$"public static global::RWinRT.ResourceObject {preferredName} {{ get; }} = new global::RWinRT.ResourceObject(__{type}_ResourceManager.Instance, \"{name}\");");
+						$"public static global::RWinRT.ResourceObject {preferredName} {{ get; }} = new global::RWinRT.ResourceObject(__{type}_ResourceManager.Instance.Resources, \"{name}\");");
 				}
 			}
 		}

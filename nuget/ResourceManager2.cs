@@ -1,4 +1,4 @@
-// R/WinRT (C#)
+// R/WinRT (C#) / CSharpAutogen V2
 //
 // Copyright (C) mntone.
 // Licensed under the MIT License.
@@ -11,7 +11,7 @@ namespace RWinRT
 {
 	internal abstract class ResourceManager
 	{
-		private ResourceMap Resources { get; }
+		protected ResourceMap Resources { get; }
 
 		protected ResourceManager(string resourceName)
 		{

@@ -17,9 +17,8 @@ namespace RWinRT.CSharpApp
 		private void OnMessageButtonClick(object sender, RoutedEventArgs e)
 		{
 			string message;
-#if CSHARP_AUTOGEN_IS_V3
-			// vvv Experimental version (CSharpAutogen V3) vvv
-			// Require mode=3 (<MntoneResourceGenerateMode>3</MntoneResourceGenerateMode> in csproj)
+#if !CSHARP_AUTOGEN_IS_V2
+			// vvv General version (CSharpAutogen V3) vvv
 			switch (i++ % 4)
 			{
 				case 0:
@@ -38,6 +37,7 @@ namespace RWinRT.CSharpApp
 			}
 #else
 			// vvv Initial release version (CSharpAutogen V2) vvv
+			// Require mode=2 (<MntoneResourceGenerateMode>2</MntoneResourceGenerateMode> in csproj)
 			switch (i++ % 4)
 			{
 				case 0:
