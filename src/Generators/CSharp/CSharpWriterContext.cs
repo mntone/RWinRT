@@ -10,6 +10,16 @@
 
 		public override bool SetReadOnly => true;
 
+		public CSharpWriterContext(Options options) : this(
+			languageVersion: options.LanguageVersion.ToCSharpVersion(CSharpVersion.CSharp10),
+			rootNamespace: options.RootNamespace,
+			implNamespace: options.ImplNamespace,
+			outputDirectory: options.OutputDirectory.Trim(new[] { '"' }),
+			filename: options.FileName ?? "Resources.g.cs",
+			lineBreak: options.LineBreak,
+			isPublic: options.IsPublic)
+		{ }
+
 		public CSharpWriterContext(
 			string rootNamespace,
 			string implNamespace = "__Impl",

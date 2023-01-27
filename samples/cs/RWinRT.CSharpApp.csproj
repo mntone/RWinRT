@@ -24,12 +24,6 @@
     <MntoneResourceExcludeResourceNames>Resources</MntoneResourceExcludeResourceNames>
   </PropertyGroup>
 
-  <!-- R/WinRT options (old version) -->
-  <!--<PropertyGroup>
-    <MntoneResourceGenerateMode>2</MntoneResourceGenerateMode>
-    <DefineConstants>$(DefineConstants);CSHARP_AUTOGEN_IS_V2</DefineConstants>
-  </PropertyGroup>-->
-
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221209.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />

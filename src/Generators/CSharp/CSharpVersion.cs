@@ -37,5 +37,17 @@ namespace Mntone.RWinRT.Generators.CSharp
 				default: throw new ArgumentException(nameof(language));
 			}
 		}
+
+		public static CSharpVersion ToCSharpVersion(this Language language, CSharpVersion defaultVersion)
+		{
+			try
+			{
+				return language.ToCSharpVersion();
+			}
+			catch (ArgumentException)
+			{
+				return defaultVersion;
+			}
+		}
 	}
 }

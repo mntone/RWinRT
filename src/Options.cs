@@ -33,7 +33,7 @@ namespace Mntone.RWinRT
 		[Option('l', "language", Default = "en-US", HelpText = "Default language.")]
 		public string DefaultLanguage { get; set; }
 
-		[Option("langver", Default = Language.CSharp10, HelpText = "Output langver (CSharp9, CSharp10, CSharp11, Cpp14 and Cpp17).")]
+		[Option("langver", Default = Language.Default, HelpText = "Output langver (CSharp9, CSharp10, CSharp11, Cpp14 and Cpp17).")]
 		public Language LanguageVersion { get; set; }
 
 		[Option("linebreak", Default = LineBreak.LF, HelpText = "Line break (LF, CR, CRLF).")]
@@ -44,5 +44,8 @@ namespace Mntone.RWinRT
 
 		[Option('p', "public", Default = false, HelpText = "Accessor level is public (C# only).")]
 		public bool IsPublic { get; set; }
+
+		[Option('t', "test", Default = false, HelpText = "Test mode.")]
+		public bool IsTest { get; set; }
 	}
 }

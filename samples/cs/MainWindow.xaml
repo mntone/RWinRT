@@ -58,7 +58,7 @@
 
 			<Expander Grid.Row="2"
 					  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-					  Header="Document (CSharpAutogenV2)"
+					  Header="Document"
 					  HorizontalAlignment="Stretch"
 					  HorizontalContentAlignment="Left"
 					  IsExpanded="True"
@@ -70,14 +70,32 @@
 						   FontWeight="SemiLight"
 						   LineHeight="1.3"
 						   TextWrapping="Wrap">
-<Span Foreground="{ThemeResource KeywordFillColorBrush}">internal static class</Span> <Span Foreground="{ThemeResource ClassFillColorBrush}">RExtensions</Span><LineBreak />
+<Span Foreground="{ThemeResource KeywordFillColorBrush}">namespace</Span> RWinRT<LineBreak />
 {<LineBreak />
-&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public static string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">GetValue</Span>(<LineBreak />
-&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">this</Span> <Span Foreground="{ThemeResource ClassFillColorBrush}">R</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">resourceId</Span>);<LineBreak />
+&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">internal struct</Span> <Span Foreground="{ThemeResource ClassFillColorBrush}">ResourceObject</Span><LineBreak />
+&#160;&#160;{<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> Key;<LineBreak />
 <LineBreak />
-&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public static string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">GetFormatValue</Span>(<LineBreak />
-&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">this</Span> <Span Foreground="{ThemeResource ClassFillColorBrush}">R</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">resourceId</Span>,<LineBreak />
-&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">params object</Span>?[] <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">args</Span>);<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> Value;<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">ValueIn</Span>(<LineBreak />
+&#160;&#160;&#160;&#160;&#160;&#160;Microsoft.Windows.ApplicationModel.Resources.<Span Foreground="{ThemeResource ClassFillColorBrush}">ResourceContext</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">context</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">ValueIn</Span>(<Span Foreground="{ThemeResource KeywordFillColorBrush}">string</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">language</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">ValueIn</Span>(System.Globalization.<Span Foreground="{ThemeResource ClassFillColorBrush}">CultureInfo</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">culture</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">Format</Span>(<Span Foreground="{ThemeResource KeywordFillColorBrush}">params object</Span>?[] <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">args</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">Format</Span>(<LineBreak />
+&#160;&#160;&#160;&#160;&#160;&#160;Microsoft.Windows.ApplicationModel.Resources.<Span Foreground="{ThemeResource ClassFillColorBrush}">ResourceContext</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">context</Span>,<LineBreak />
+&#160;&#160;&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">params object</Span>?[] <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">args</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">Format</Span>(<Span Foreground="{ThemeResource KeywordFillColorBrush}">string</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">language</Span>, <Span Foreground="{ThemeResource KeywordFillColorBrush}">params object</Span>?[] <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">args</Span>);<LineBreak />
+<LineBreak />
+&#160;&#160;&#160;&#160;<Span Foreground="{ThemeResource KeywordFillColorBrush}">public string</Span> <Span Foreground="{ThemeResource MemberFunctionFillColorBrush}">Format</Span>(<LineBreak />
+&#160;&#160;&#160;&#160;&#160;&#160;System.Globalization.<Span Foreground="{ThemeResource ClassFillColorBrush}">CultureInfo</Span> <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">culture</Span>, <Span Foreground="{ThemeResource KeywordFillColorBrush}">params object</Span>?[] <Span Foreground="{ThemeResource LocalVariableFillColorBrush}">args</Span>);<LineBreak />
+&#160;&#160;}<LineBreak />
 }
 				</TextBlock>
 			</Expander>

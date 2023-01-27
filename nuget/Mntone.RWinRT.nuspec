@@ -21,7 +21,6 @@
 		<file target="build" src="Mntone.RWinRT.targets" />
 
 		<!-- C# sources -->
-		<file target="embedded\any" src="ResourceManager2.cs" />
 		<file target="embedded\any" src="ResourceManager3.cs" />
 		<file target="tools\net6" src="..\bin\Release\RWinRT\net6\*" exclude="..\bin\Release\RWinRT\**\*.pdb" />
 

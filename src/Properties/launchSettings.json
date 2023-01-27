@@ -7,6 +7,10 @@
     "R/WinRT (C++)": {
       "commandName": "Project",
       "commandLineArgs": "--input \"$(ProjectDir)..\\samples\\cpp\\Strings\\ProgramResources.lang-en-US.resw\",\"$(ProjectDir)..\\samples\\cpp\\Strings\\ProgramResources.lang-ja-JP.resw\",\"$(ProjectDir)..\\samples\\cpp\\Strings\\Resources.lang-en-US.resw\",\"$(ProjectDir)..\\samples\\cpp\\Strings\\Resources.lang-ja-JP.resw\"\r\n--output \"$(ProjectDir)..\\samples\\cpp\\Generated Files\"\r\n--exclude Resources\r\n--filename res.g.h\r\n--namespace RWinRT.CppApp\r\n--impl-namespace __impl\r\n--default ProgramResources\r\n--indent Space4\r\n--language en-US\r\n--langver Cpp17\r\n--linebreak LF"
+    },
+    "R/WinRT (Console)": {
+      "commandName": "Project",
+      "commandLineArgs": "--input \"$(ProjectDir)..\\samples\\cs\\Strings\\ProgramResources.lang-en-US.resw\",\"$(ProjectDir)..\\samples\\cs\\Strings\\ProgramResources.lang-ja-JP.resw\",\"$(ProjectDir)..\\samples\\cs\\Strings\\Resources.lang-en-US.resw\",\"$(ProjectDir)..\\samples\\cs\\Strings\\Resources.lang-ja-JP.resw\"\r\n--output \"$(ProjectDir)..\\obj\\Debug\\RWinRT.CSharpApp\\x86\\Generated Files\"\r\n--exclude Resources\r\n--filename Resources.g.cs\r\n--namespace RWinRT.CSharpApp\r\n--default ProgramResources\r\n--indent Space4\r\n--language en-US\r\n--linebreak LF\r\n--mode 3\r\n--test"
     }
   }
 }

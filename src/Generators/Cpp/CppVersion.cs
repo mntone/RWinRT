@@ -31,5 +31,17 @@ namespace Mntone.RWinRT.Generators.Cpp
 				default: throw new ArgumentException(nameof(language));
 			}
 		}
+
+		public static CppVersion ToCppVersion(this Language language, CppVersion defaultVersion)
+		{
+			try
+			{
+				return language.ToCppVersion();
+			}
+			catch (ArgumentException)
+			{
+				return defaultVersion;
+			}
+		}
 	}
 }

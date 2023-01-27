@@ -4,6 +4,15 @@
 	{
 		public override bool SetReadOnly => false;
 
+		public CppWriterContext(Options options) : this(
+			languageVersion: options.LanguageVersion.ToCppVersion(CppVersion.Cpp17),
+			rootNamespace: options.RootNamespace,
+			implNamespace: options.ImplNamespace,
+			outputDirectory: options.OutputDirectory.Trim(new[] { '"' }),
+			filename: options.FileName ?? "res.g.h",
+			lineBreak: options.LineBreak)
+		{ }
+
 		public CppWriterContext(
 			string rootNamespace,
 			string implNamespace = "__impl",

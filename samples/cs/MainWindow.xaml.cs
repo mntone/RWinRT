@@ -17,8 +17,7 @@ namespace RWinRT.CSharpApp
 		private void OnMessageButtonClick(object sender, RoutedEventArgs e)
 		{
 			string message;
-#if !CSHARP_AUTOGEN_IS_V2
-			// vvv General version (CSharpAutogen V3) vvv
+			// vvv General version vvv
 			switch (i++ % 4)
 			{
 				case 0:
@@ -35,26 +34,6 @@ namespace RWinRT.CSharpApp
 					message = R.MainWindow_MessageButton_Message4.Value;
 					break;
 			}
-#else
-			// vvv Initial release version (CSharpAutogen V2) vvv
-			// Require mode=2 (<MntoneResourceGenerateMode>2</MntoneResourceGenerateMode> in csproj)
-			switch (i++ % 4)
-			{
-				case 0:
-					message = R.MainWindow_MessageButton_Message.GetValue();
-					break;
-				case 1:
-					message = R.MainWindow_MessageButton_Message2.GetValue();
-					break;
-				case 2:
-					message = R.MainWindow_MessageButton_Message3.GetFormatValue(i);
-					break;
-				case 3:
-				default:
-					message = R.MainWindow_MessageButton_Message4.GetValue();
-					break;
-			}
-#endif
 
 			var dialog = new ContentDialog()
 			{

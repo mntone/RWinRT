@@ -2,6 +2,7 @@
 using Mntone.RWinRT.Generators;
 using Mntone.RWinRT.Generators.Cpp;
 using Mntone.RWinRT.Generators.CSharp;
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -55,15 +56,25 @@ namespace Mntone.RWinRT
 			}
 
 			// Generate
-			if (options.Value.LanguageVersion.GetIsCpp())
+			if (options.Value.IsTest)
 			{
-				var ctx = new CppWriterContext(
-					options.Value.LanguageVersion.ToCppVersion(),
-					options.Value.RootNamespace,
-					implNamespace: options.Value.ImplNamespace,
-					outputDirectory: options.Value.OutputDirectory.Trim(new[] { '"' }),
-					filename: options.Value.FileName ?? "res.g.h",
-					lineBreak: options.Value.LineBreak);
+				var output = string.Concat(new string[]
+				{
+					"===[ CppAutogen1 ]=========================================\n",
+					CppAutogen1.Build(new CppWriterContext(options.Value), defaultResource, otherResources),
+					"===[ CppAutogen2 ]=========================================\n",
+					CppAutogen2.Build(new CppWriterContext(options.Value), defaultResource, otherResources),
+					"===[ CSharpAutogen1 ]=========================================\n",
+					CSharpAutogen1.Build(new CSharpWriterContext(options.Value), defaultResource, otherResources),
+					"===[ CSharpAutogen3 ]=========================================\n",
+					CSharpAutogen3.Build(new CSharpWriterContext(options.Value), defaultResource, otherResources),
+				});
+				Console.WriteLine(output);
+				return 0;
+			}
+			else if (options.Value.LanguageVersion.GetIsCpp())
+			{
+				var ctx = new CppWriterContext(options.Value);
 				if (!ctx.ExistsOutputDirectory())
 				{
 					return -1;
@@ -89,14 +100,7 @@ namespace Mntone.RWinRT
 			}
 			else
 			{
-				var ctx = new CSharpWriterContext(
-					options.Value.LanguageVersion.ToCSharpVersion(),
-					options.Value.RootNamespace,
-					implNamespace: options.Value.ImplNamespace,
-					outputDirectory: options.Value.OutputDirectory.Trim(new[] { '"' }),
-					filename: options.Value.FileName ?? "Resources.g.cs",
-					lineBreak: options.Value.LineBreak,
-					isPublic: options.Value.IsPublic);
+				var ctx = new CSharpWriterContext(options.Value);
 				if (!ctx.ExistsOutputDirectory())
 				{
 					return -1;
@@ -112,9 +116,6 @@ namespace Mntone.RWinRT
 				{
 					case 1:
 						output = CSharpAutogen1.Build(ctx, defaultResource, otherResources);
-						break;
-					case 2:
-						output = CSharpAutogen2.Build(ctx, defaultResource, otherResources);
 						break;
 					case 3:
 					default:

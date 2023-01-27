@@ -1,5 +1,4 @@
 ﻿using Mntone.RWinRT.Generators.CSharp.BlockWriters;
-using Mntone.RWinRT.Generators.CSharp.UnitWriters;
 using Mntone.RWinRT.Generators.UnitWriters;
 using System;
 
@@ -33,7 +32,11 @@ namespace Mntone.RWinRT.Generators.CSharp
 			{
 				foreach (var resource in data.Resources)
 				{
-					ConstVariable.Write(ctx, resource.Name, resource.Value);
+					var name = resource.Name;
+					var preferredName = ctx.PreferredNameConverter(name);
+					Raw.Write(ctx,
+						$"/// <summary>\"{resource.Value}\"</summary>",
+						$"{ctx.Accessor} const string {preferredName} = \"{name}\";");
 				}
 			}
 		}
