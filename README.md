@@ -2,7 +2,7 @@
 
 "R/WinRT" is ease-to-use resources access for MRTCore.
 
-![R/WinRT](https://user-images.githubusercontent.com/901816/213721626-0c74d357-0166-48a3-8f58-99b4e7adbdd3.png)
+![R/WinRT](https://user-images.githubusercontent.com/901816/214999135-7cd730d9-970c-4330-99bf-f0b76c52347a.png)
 
 ## Requirements
 
