@@ -39,7 +39,7 @@ namespace RWinRT
 		}
 	}
 
-	internal struct ResourceObject
+	internal readonly struct ResourceObject
 	{
 		public Microsoft.Windows.ApplicationModel.Resources.ResourceMap Resources { get; }
 
@@ -116,7 +116,7 @@ namespace RWinRT
 		/// </summary>
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
 		/// <returns>A string containing the formatted and localized text.</returns>
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 		public string Format(params object?[] args)
 #else
 		public string Format(params object[] args)
@@ -131,7 +131,7 @@ namespace RWinRT
 		/// <param name="context">The context to get the context specified.</param>
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
 		/// <returns>A string containing the formatted and localized text.</returns>
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 		public string Format(Microsoft.Windows.ApplicationModel.Resources.ResourceContext context, params object?[] args)
 #else
 		public string Format(Microsoft.Windows.ApplicationModel.Resources.ResourceContext context, params object[] args)
@@ -147,7 +147,7 @@ namespace RWinRT
 		/// <param name="language">The language tag to get the target language.</param>
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
 		/// <returns>A string containing the formatted and localized text.</returns>
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 		public string Format(string language, params object?[] args)
 #else
 		public string Format(string language, params object[] args)
@@ -164,7 +164,7 @@ namespace RWinRT
 		/// <param name="culture">The culture to get the target language.</param>
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
 		/// <returns>A string containing the formatted and localized text.</returns>
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 		public string Format(CultureInfo culture, params object?[] args)
 #else
 		public string Format(CultureInfo culture, params object[] args)
@@ -187,7 +187,7 @@ namespace RWinRT
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
 		/// <returns>A string containing the formatted and localized text.</returns>
 		[System.Obsolete($"This method is obsolete. Call {nameof(Format)} instead.", false)]
-#if NET6_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NET5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
 		public string GetFormatValue(params object?[] args)
 #else
 		public string GetFormatValue(params object[] args)
