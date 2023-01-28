@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="res_bak.h" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\ProgramResources.lang-en-US.resw">

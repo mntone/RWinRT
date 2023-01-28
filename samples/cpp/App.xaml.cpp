@@ -27,6 +27,6 @@ App::App() {
 }
 
 void App::OnLaunched(LaunchActivatedEventArgs const&) {
-	//window = make<MainWindow>();
+	window = make<MainWindow>();
 	window.Activate();
 }
