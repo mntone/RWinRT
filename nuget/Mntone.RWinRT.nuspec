@@ -10,11 +10,13 @@
 		<requireLicenseAcceptance>true</requireLicenseAcceptance>
 		<description>R/WinRT is ease-to-use resources access for MRTCore.</description>
 		<copyright>Copyright © 2023 mntone</copyright>
+		<readme>docs\readme.md</readme>
 		<language>en-US</language>
 		<tags>Win Windows WinRT WindowsRuntime WinUI WindowsUI WinAppSDK WindowsAppSDK mntone Cpp C++ C# CSharp MRTCore Resources resw Culture Globalization Localization i18n</tags>
+		<repository type="git" url="https://github.com/mntone/RWinRT.git" branch="main" />
 	</metadata>
 	<files>
-		<!--<file src="readme.txt" />-->
+		<file target="docs" src="readme.md" />
 		<file target="license.txt" src="..\LICENSE.txt" />
 
 		<file target="build" src="Mntone.RWinRT.props" />

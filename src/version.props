@@ -5,7 +5,7 @@
 		<RWinRTCopyright>Copyright (c) 2023 $(RWinRTAuthor). All rights reserved.</RWinRTCopyright>
 		<RWinRTVersionMajor>0</RWinRTVersionMajor>
 		<RWinRTVersionMinor>0</RWinRTVersionMinor>
-		<RWinRTVersionPatch>3</RWinRTVersionPatch>
+		<RWinRTVersionPatch>4</RWinRTVersionPatch>
 		<RWinRTVersionBuild Condition="$(AngelVersionBuild)==''">$([System.DateTime]::Now.ToString(`yyyy`))</RWinRTVersionBuild>
 		<RWinRTVersionRevision Condition="$(AngelVersionRevision)==''">$([System.DateTime]::Now.ToString(`MMdd`))</RWinRTVersionRevision>
 		<RWinRTVersionPreRelease>beta</RWinRTVersionPreRelease>
